@@ -1,0 +1,589 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    background: #0a0e14;
+    color: #ffffff;
+    min-height: 100vh;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* ========== ЭКРАН ЗАГРУЗКИ ========== */
+#loading-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #000000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10000;
+    animation: fadeOut 0.5s ease-in-out 3s forwards;
+}
+
+.loading-image-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.loading-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+@media (max-width: 768px) {
+    .loading-image {
+        object-fit: contain;
+    }
+}
+
+@keyframes fadeOut {
+    to {
+        opacity: 0;
+        visibility: hidden;
+    }
+}
+
+/* ========== ОСНОВНОЙ КОНТЕНТ ========== */
+#main-content {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    overflow-y: auto;
+}
+
+/* ========== ФОНОВОЕ ИЗОБРАЖЕНИЕ НА ПОЛНЫЙ ЭКРАН ========== */
+.background-image-wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    overflow: hidden;
+}
+
+.background-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+}
+
+.background-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.75);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+}
+
+/* Для мобильных устройств */
+@media (max-width: 768px) {
+    .background-image {
+        object-fit: cover;
+    }
+    
+    .background-overlay {
+        background: rgba(0, 0, 0, 0.8);
+        backdrop-filter: blur(6px);
+        -webkit-backdrop-filter: blur(6px);
+    }
+}
+
+/* Для альбомной ориентации */
+@media (orientation: landscape) {
+    .background-image {
+        object-fit: cover;
+    }
+}
+
+/* ========== МОДАЛЬНОЕ ОКНО ========== */
+.modal-container {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    max-width: 440px;
+    background: linear-gradient(180deg, rgba(26, 35, 50, 0.95) 0%, rgba(15, 20, 25, 0.95) 100%);
+    border-radius: 20px;
+    padding: 30px 25px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    animation: slideUp 0.4s ease-out;
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ========== ЗАГОЛОВОК ========== */
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.modal-header h2 {
+    font-size: 24px;
+    font-weight: 600;
+    color: #ffffff;
+}
+
+.close-btn {
+    background: none;
+    border: none;
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 28px;
+    cursor: pointer;
+    padding: 0;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.3s;
+    line-height: 1;
+}
+
+.close-btn:hover {
+    color: #ffffff;
+}
+
+.close-btn:active {
+    opacity: 0.7;
+}
+
+/* ========== ЛОГОТИП ========== */
+.logo-container {
+    width: 100%;
+    height: 120px;
+    margin: 0 auto 25px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.logo-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+/* ========== ФОРМА ========== */
+#login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.input-group {
+    position: relative;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 16px 18px;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 12px;
+    color: #ffffff;
+    font-size: 15px;
+    transition: all 0.3s;
+    -webkit-apparance: none;
+}
+
+.input-group input:focus {
+    outline: none;
+    background: rgba(255, 255, 255, 0.12);
+    border-color: rgba(255, 255, 255, 0.25);
+}
+
+.input-group input::placeholder {
+    color: rgba(255, 255, 255, 0.4);
+}
+
+.password-group {
+    position: relative;
+}
+
+.password-group input {
+    padding-right: 50px;
+}
+
+.toggle-password {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: rgba(255, 255, 255, 0.4);
+    cursor: pointer;
+    padding: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.3s;
+}
+
+.toggle-password:hover {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.toggle-password svg {
+    width: 22px;
+    height: 22px;
+}
+
+/* ========== КНОПКА ВХОДА ========== */
+.login-btn {
+    width: 100%;
+    padding: 16px;
+    background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+    border: none;
+    border-radius: 12px;
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+    text-transform: none;
+    margin-top: 5px;
+}
+
+.login-btn:hover {
+    background: linear-gradient(135deg, #45a049 0%, #3d8b40 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(76, 175, 80, 0.3);
+}
+
+.login-btn:active {
+    transform: translateY(0);
+}
+
+.login-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* ========== ЗАБЫЛИ ПАРОЛЬ ========== */
+.forgot-password {
+    display: block;
+    text-align: center;
+    color: rgba(255, 255, 255, 0.6);
+    text-decoration: underline;
+    font-size: 14px;
+    margin: 15px 0;
+    transition: color 0.3s;
+}
+
+.forgot-password:hover {
+    color: #ffffff;
+}
+
+/* ========== РАЗДЕЛИТЕЛЬ ========== */
+.divider {
+    text-align: center;
+    color: rgba(255, 255, 255, 0.4);
+    font-size: 13px;
+    margin: 20px 0 15px;
+    position: relative;
+}
+
+/* ========== СОЦИАЛЬНЫЕ КНОПКИ ========== */
+.social-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+.social-btn {
+    width: 56px;
+    height: 56px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.3s;
+    padding: 0;
+}
+
+.social-btn:hover {
+    background: rgba(255, 255, 255, 0.15);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+.social-btn:active {
+    transform: translateY(0);
+}
+
+.social-btn svg {
+    width: 28px;
+    height: 28px;
+}
+
+/* ========== ФУТЕР ========== */
+.modal-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.footer-link {
+    color: rgba(255, 255, 255, 0.6);
+    text-decoration: none;
+    font-size: 14px;
+    transition: color 0.3s;
+}
+
+.footer-link:hover {
+    color: #ffffff;
+}
+
+/* ========== АДАПТИВНОСТЬ ========== */
+@media (max-width: 768px) {
+    .modal-container {
+        padding: 25px 20px;
+        border-radius: 16px;
+        background: linear-gradient(180deg, rgba(26, 35, 50, 0.97) 0%, rgba(15, 20, 25, 0.97) 100%);
+    }
+
+    .modal-header h2 {
+        font-size: 22px;
+    }
+
+    .logo-container {
+        height: 100px;
+        margin-bottom: 20px;
+    }
+
+    .social-btn {
+        width: 52px;
+        height: 52px;
+    }
+
+    .social-btn svg {
+        width: 26px;
+        height: 26px;
+    }
+}
+
+@media (max-width: 480px) {
+    #main-content {
+        padding: 15px;
+        align-items: flex-start;
+        padding-top: 40px;
+    }
+
+    .modal-container {
+        padding: 20px 18px;
+        border-radius: 14px;
+    }
+
+    .modal-header {
+        margin-bottom: 20px;
+    }
+
+    .modal-header h2 {
+        font-size: 20px;
+    }
+
+    .close-btn {
+        font-size: 24px;
+        width: 28px;
+        height: 28px;
+    }
+
+    .logo-container {
+        height: 90px;
+        margin-bottom: 18px;
+        border-radius: 12px;
+    }
+
+    .input-group input {
+        padding: 14px 16px;
+        font-size: 16px;
+        border-radius: 10px;
+    }
+
+    .password-group input {
+        padding-right: 48px;
+    }
+
+    .toggle-password {
+        right: 10px;
+    }
+
+    .toggle-password svg {
+        width: 20px;
+        height: 20px;
+    }
+
+    .login-btn {
+        padding: 14px;
+        font-size: 15px;
+        border-radius: 10px;
+    }
+
+    .forgot-password {
+        font-size: 13px;
+        margin: 12px 0;
+    }
+
+    .divider {
+        font-size: 12px;
+        margin: 18px 0 12px;
+    }
+
+    .social-btn {
+        width: 48px;
+        height: 48px;
+    }
+
+    .social-btn svg {
+        width: 24px;
+        height: 24px;
+    }
+
+    .social-buttons {
+        gap: 12px;
+        margin-bottom: 20px;
+    }
+
+    .modal-footer {
+        padding-top: 18px;
+    }
+
+    .footer-link {
+        font-size: 13px;
+    }
+}
+
+@media (max-width: 360px) {
+    .modal-container {
+        padding: 18px 15px;
+    }
+
+    .logo-container {
+        height: 80px;
+    }
+
+    .social-btn {
+        width: 44px;
+        height: 44px;
+    }
+
+    .social-btn svg {
+        width: 22px;
+        height: 22px;
+    }
+}
+
+/* Для альбомной ориентации */
+@media (orientation: landscape) and (max-height: 600px) {
+    #main-content {
+        align-items: flex-start;
+        padding-top: 20px;
+        padding-bottom: 20px;
+    }
+
+    .modal-container {
+        max-height: 90vh;
+        overflow-y: auto;
+    }
+
+    .logo-container {
+        height: 70px;
+        margin-bottom: 15px;
+    }
+
+    #login-form {
+        gap: 12px;
+    }
+
+    .forgot-password {
+        margin: 10px 0;
+    }
+
+    .divider {
+        margin: 15px 0 10px;
+    }
+
+    .social-buttons {
+        margin-bottom: 15px;
+    }
+
+    .modal-footer {
+        padding-top: 15px;
+    }
+}
+
+/* Улучшение производительности */
+.login-btn,
+.social-btn,
+.close-btn,
+.toggle-password,
+.background-image {
+    will-change: transform;
+}
+
+/* Предотвращение выделения текста */
+.login-btn,
+.social-btn,
+.close-btn,
+.toggle-password,
+.forgot-password,
+.footer-link {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+}
